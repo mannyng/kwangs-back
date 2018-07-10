@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180331055057) do
+ActiveRecord::Schema.define(version: 20180518045627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,9 +133,21 @@ ActiveRecord::Schema.define(version: 20180331055057) do
     t.string "sender_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status", default: "unread"
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["customer_id"], name: "index_messages_on_customer_id"
     t.index ["sender_name"], name: "index_messages_on_sender_name"
+  end
+
+  create_table "products", id: :bigint, default: nil, force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description", null: false
+    t.string "image_url", null: false
+    t.string "status", default: "active"
+    t.decimal "price", precision: 5, scale: 2
+    t.text "avatars", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

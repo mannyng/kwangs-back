@@ -33,6 +33,9 @@ Rails.application.routes.draw do
      collection do
       get 'my_messages'
      end
+     member do
+      get 'read'
+     end
     end 
  end
  resources :employer_posts do
@@ -56,4 +59,5 @@ Rails.application.routes.draw do
  resources :conversations, only: [:show,:create]
  resources :messages, only: [:create]
  resources :campaigns, only: [:create]
+ resources :products
 end
