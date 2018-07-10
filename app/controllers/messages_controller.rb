@@ -3,13 +3,14 @@ class MessagesController < ApplicationController
    before_action :set_sender_customer, only: [:create]
 
   def read
-   if params[:id]
-    @message= Message.find(params[:id])
+    if params[:id]
+     @message= Message.find(params[:id])
    
-    if @message.read!
-     render json: {status: :created }
-     else
-       render json: {errors:  @message.errors, status: :unprocessable_entity }
+     if @message.read!
+        render json: {status: :created }
+      else
+        render json: {errors:  @message.errors, status: :unprocessable_entity }
+     end
     end
   end
    
