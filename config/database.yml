@@ -20,7 +20,7 @@ production:
   password: "<%= Figaro.env.POSTGRES_DB_PASSWORD %>"
   username: "<%= Figaro.env.POSTGRES_DB_USERNAME %>"
   host: localhost
-test:
+test: &test
   adapter: postgresql
   database: kwangs_test
   encoding: utf8
@@ -28,3 +28,5 @@ test:
   password: "<%= Figaro.env.POSTGRES_DB_PASSWORD %>"
   username: "<%= Figaro.env.POSTGRES_DB_USERNAME %>"
   pool: 5
+cucumber:
+  <<: *test

@@ -27,9 +27,14 @@ gem 'will_paginate', '~> 3.1.0'
 group :development, :test do
   gem 'geoip2_compat'
   gem 'rspec-rails', '~> 3.6'
-  # Use Factory Girl for generating random test data
-  #gem 'factory_girl_rails'
-  gem 'factory_bot'
+  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
+  gem 'cucumber-rails', require: false
+  #gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
+end
+
+group :test do
+  gem 'database_cleaner'
 end
 
 # Use Puma as the app server
