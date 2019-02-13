@@ -36,7 +36,13 @@ class EmployerPostsController < ApplicationController
      #geoip = GeoIP2Compat.new('/opt/GeoIP/GeoLite2-City_20171205/GeoLite2-City.mmdb')
      geoip = GeoIP::City.new('/opt/GeoIP/GeoLiteCity.dat')
      cunnect = geoip.look_up(request.remote_ip)
-     locations = JobLocation.near([cunnect[:latitude],cunnect[:longitude]],200000)
+     if cunnect == nil
+         latitude=9.066667
+         longitude=7.483333
+         locations = JobLocation.near([latitude,longitude],200000)
+     else
+         locations = JobLocation.near([cunnect[:latitude],cunnect[:longitude]],200000)
+     end
      #employers = EmployerPost.all
      publicjobs = []
       #locations.order(id: :asc).limit(6).each do |location|
@@ -53,14 +59,26 @@ class EmployerPostsController < ApplicationController
         #geoip = GeoIP2Compat.new('/opt/GeoIP/GeoLite2-City_20171205/GeoLite2-City.mmdb')
         geoip = GeoIP::City.new('/opt/GeoIP/GeoLiteCity.dat')
         @cunnect = geoip.look_up(request.remote_ip)
-        render json: @cunnect, status: :ok
+        if @cunnect == nil
+            @cunnect = {:country_code=>"NG", :country_code3=>"NGS", :country_name=>"Nigeria", :region=>"01", :region_name=>"Abuja", :city=>"Abuja", :postal_code=>"80500", :latitude=>9.066667, :longitude=>7.483333} 
+            render json: @cunnect, status: :ok
+        else
+            render json: @cunnect, status: :ok
+        end
     end
      
    def private_jobs
      #geoip = GeoIP2Compat.new('/opt/GeoIP/GeoLite2-City_20171205/GeoLite2-City.mmdb')
      geoip = GeoIP::City.new('/opt/GeoIP/GeoLiteCity.dat')
      cunnect = geoip.look_up(request.remote_ip)
-     locations = JobLocation.near([cunnect[:latitude],cunnect[:longitude]],200000)
+     #locations = JobLocation.near([cunnect[:latitude],cunnect[:longitude]],200000)
+     if cunnect == nil
+         latitude=9.066667
+         longitude=7.483333
+         locations = JobLocation.near([latitude,longitude],200000)
+     else
+         locations = JobLocation.near([cunnect[:latitude],cunnect[:longitude]],200000)
+     end
      #employers = EmployerPost.all
      privatejobs = []
       locations.each do |location|
